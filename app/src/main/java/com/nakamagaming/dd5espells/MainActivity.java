@@ -130,11 +130,11 @@ public class MainActivity extends ActionBarActivity implements IFilterChangeList
 
         //set searchView
         mSearchView = (SearchView) this.findViewById(R.id.search_spell);
+        mSearchView.setQueryHint("Spell Search...");
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
             @Override
             public boolean onQueryTextSubmit(String query) {
-
                 mAdapter.setSpells(SpellUtils.filterByName(mFilteredList, query));
                 mAdapter.notifyDataSetChanged();
                 return false;
@@ -142,7 +142,6 @@ public class MainActivity extends ActionBarActivity implements IFilterChangeList
 
             @Override
             public boolean onQueryTextChange(String newText) {
-
                 mAdapter.setSpells(SpellUtils.filterByName(mFilteredList, newText));
                 mAdapter.notifyDataSetChanged();
                 return false;
@@ -183,13 +182,9 @@ public class MainActivity extends ActionBarActivity implements IFilterChangeList
 
     @Override
     public void onFilterChanged(ArrayList<ClassType> classList){
-        for(ClassType classType : classList){
-            Log.i("", classType.toString());
-        }
-
         mFilteredList = SpellUtils.filterByClass(mFullList, classList);
         if (mSearchView.getQuery() != null && mSearchView.getQuery().length() != 0) {
-            SpellUtils.filterByName(mFilteredList, mSearchView.getQuery().toString());
+            mFilteredList = SpellUtils.filterByName(mFilteredList, mSearchView.getQuery().toString());
         }
         mAdapter.setSpells(mFilteredList);
         mAdapter.notifyDataSetChanged();

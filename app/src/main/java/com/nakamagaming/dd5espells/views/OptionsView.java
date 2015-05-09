@@ -20,7 +20,7 @@ public class OptionsView {
 
     public OptionsView(View view, IFilterChangeListener listener) {
         //initiate filterable list.
-        mFilteredClasses = new ArrayList<ClassType>();
+        mFilteredClasses = new ArrayList<>();
         mFilteredClasses.add(ClassType.BARD);
         mFilteredClasses.add(ClassType.CLERIC);
         mFilteredClasses.add(ClassType.DRUID);
