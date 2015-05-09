@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.SearchView;
 
 import com.nakamagaming.dd5espells.adapters.SpellAdapter;
 import com.nakamagaming.dd5espells.helpers.ClassType;
@@ -25,6 +26,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
@@ -32,7 +34,10 @@ public class MainActivity extends ActionBarActivity {
 
     private final String mSpreadSheetID = "15ylLqPEwtpdwpKPp6HTvzlmaDogkBGe2w29b9RtxaiA";
     private ListView mSpellListView;
+    private SearchView mSearchView;
 
+    private ArrayList<Spell> mFullList;
+    private SpellAdapter mAdapter;
     /*
     TODO list
     - usability
@@ -55,9 +60,53 @@ public class MainActivity extends ActionBarActivity {
         //set nakama spash screen.
         setContentView(R.layout.activity_main);
 
-        mSpellListView = (ListView)this.findViewById(R.id.spell_list);
+        mFullList = new ArrayList<Spell>();
+        new GetJSONObjectTask().execute();
+    }
 
-        new GetJSONObjectTask(this).execute();
+    public void onSpellListLoaded(ArrayList<Spell> spells) {
+        //here we should start the correct view
+
+        //sort spells
+        mFullList = SpellUtils.sortByName(spells);
+        mAdapter = new SpellAdapter(mFullList, getApplicationContext());
+
+        //set listView
+        mSpellListView = (ListView) this.findViewById(R.id.spell_list);
+        mSpellListView.setAdapter(mAdapter);
+        mSpellListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Spell spell = mAdapter.getItem(position);
+                Intent i = new Intent(getApplicationContext(), SpellActivity.class);
+                i.putExtra(Spell.ID_SPELL, spell);
+
+                startActivity(i);
+            }
+        });
+
+        //set searchView
+        mSearchView = (SearchView) this.findViewById(R.id.search_spell);
+        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                mAdapter.setSpells(SpellUtils.filterByName(mFullList, query));
+                mAdapter.notifyDataSetChanged();
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                mAdapter.setSpells(SpellUtils.filterByName(mFullList, newText));
+                mAdapter.notifyDataSetChanged();
+                return false;
+            }
+        });
+
+
     }
 
     @Override
@@ -78,11 +127,6 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private class GetJSONObjectTask extends AsyncTask<String, Void, String> {
-        private Context mContext;
-
-        public GetJSONObjectTask(Context context){
-            mContext = context;
-        }
 
         @Override
         protected String doInBackground(String... urls) {
@@ -106,6 +150,7 @@ public class MainActivity extends ActionBarActivity {
             return "";
 
         }
+
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {
@@ -115,36 +160,21 @@ public class MainActivity extends ActionBarActivity {
             try {
                 JSONArray array = new JSONArray(result);
 
-                for(int i = 0; i<array.length(); i++){
+                for (int i = 0; i < array.length(); i++) {
                     JSONObject row = array.getJSONObject(i);
                     Spell spell = new Spell();
 
-                    try{
+                    try {
                         spell.populate(row);
                     }
                     //catch exception in single item
-                    catch (JSONException e){
+                    catch (JSONException e) {
                         e.printStackTrace();// todo - temp removed due to to many exceptions. - Clear out json file.
                     }
                     spells.add(spell);
                 }
 
-
-                //sort spells
-                spells = SpellUtils.sortByName(spells);
-                final SpellAdapter adapter = new SpellAdapter(spells, getApplicationContext());
-                mSpellListView.setAdapter(adapter);
-                mSpellListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Spell spell = adapter.getItem(position);
-                        Intent i = new Intent(mContext, SpellActivity.class);
-                        i.putExtra(Spell.ID_SPELL, spell);
-
-                        startActivity(i);
-                    }
-                });
-
+                onSpellListLoaded(spells);
             }
             //catch exception in json Array
             catch (JSONException e) {

@@ -2,6 +2,7 @@ package com.nakamagaming.dd5espells.utils;
 
 import com.nakamagaming.dd5espells.Spell;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -18,5 +19,22 @@ public class SpellUtils {
             }
         });
         return list;
+    }
+
+    public static ArrayList<Spell> filterByName(ArrayList<Spell> list, String text){
+        ArrayList<Spell> result = new ArrayList<>();
+
+        //return full list if we're not filtering anyway.
+        if(text == null || text.isEmpty())
+            return list;
+
+        for(Spell spell : list){
+            //name is case sensitive
+            String name = spell.getName().toLowerCase();
+            if(name.contains(text)){
+                result.add(spell);
+            }
+        }
+        return result;
     }
 }

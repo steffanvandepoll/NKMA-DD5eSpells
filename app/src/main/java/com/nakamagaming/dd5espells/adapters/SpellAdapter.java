@@ -48,7 +48,11 @@ public class SpellAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View vi = convertView;
 
-        vi = mInflater.inflate(mResource, null);
+        if(vi == null){
+            //only inflate if null.
+            vi = mInflater.inflate(mResource, null);
+        }
+
         Spell spell = mSpells.get(position);
 
         TextView nameView = (TextView)vi.findViewById(R.id.spell_name);
@@ -68,5 +72,13 @@ public class SpellAdapter extends BaseAdapter {
         vi.findViewById(R.id.class_icon_wizard).setVisibility(spell.isUsableByWizard() ? View.VISIBLE : View.GONE);
 
         return vi;
+    }
+
+    public ArrayList<Spell> getmpells() {
+        return mSpells;
+    }
+
+    public void setSpells(ArrayList<Spell> mSpells) {
+        this.mSpells = mSpells;
     }
 }
