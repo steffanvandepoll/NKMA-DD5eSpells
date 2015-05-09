@@ -5,19 +5,25 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.SearchView;
 
 import com.nakamagaming.dd5espells.adapters.SpellAdapter;
 import com.nakamagaming.dd5espells.helpers.ClassType;
 import com.nakamagaming.dd5espells.helpers.WebHelper;
+import com.nakamagaming.dd5espells.interfaces.IFilterChangeListener;
 import com.nakamagaming.dd5espells.utils.SpellUtils;
+import com.nakamagaming.dd5espells.views.OptionsView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,26 +31,34 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements IFilterChangeListener{
 
     private final String mSpreadSheetID = "15ylLqPEwtpdwpKPp6HTvzlmaDogkBGe2w29b9RtxaiA";
     private ListView mSpellListView;
+    private SearchView mSearchView;
+    private DrawerLayout mDrawerLayout;
+
+    private ArrayList<Spell> mFullList;
+    private ArrayList<Spell> mFilteredList;
+    private ArrayList<ClassType> mFilteredClasses;
+
+    private ActionBarDrawerToggle mDrawerToggle;
+
+    private SpellAdapter mAdapter;
+    private OptionsView mOptionsView;
 
     /*
     TODO list
     - usability
-        - order list - alphabet
-        - text filter above the listview
         - class filter - make draw layout.
 
     - design
         - list item
             - replace colored lines with icons
-            - add spell level - smaller gray
-            - lower font size
         - spell details
      */
 
@@ -55,9 +69,88 @@ public class MainActivity extends ActionBarActivity {
         //set nakama spash screen.
         setContentView(R.layout.activity_main);
 
-        mSpellListView = (ListView)this.findViewById(R.id.spell_list);
+        mFullList = new ArrayList<>();
+        new GetJSONObjectTask().execute();
+    }
 
-        new GetJSONObjectTask(this).execute();
+    public void onSpellListLoaded(ArrayList<Spell> spells) {
+        //here we should start the correct view
+
+        //init vars
+        mFullList = SpellUtils.sortByName(spells);
+        mFilteredList = new ArrayList<>(mFullList);
+        mAdapter = new SpellAdapter(mFullList, getApplicationContext());
+
+        //set drawerlayout
+        mDrawerLayout = (DrawerLayout)findViewById(R.id.main_drawer_layout);
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_drawer, R.string.app_name, R.string.app_name) {
+
+            /** Called when a drawer has settled in a completely closed state. */
+            public void onDrawerClosed(View view) {
+                super.onDrawerClosed(view);
+
+                mSpellListView.setEnabled(true);
+
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+
+            /** Called when a drawer has settled in a completely open state. */
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                mSpellListView.setEnabled(false);
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+        };
+
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+
+        try{
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeButtonEnabled(true);
+        }
+        catch (NullPointerException e){
+
+        }
+
+        mDrawerToggle.syncState();
+
+        //set listView
+        mSpellListView = (ListView) this.findViewById(R.id.spell_list);
+        mSpellListView.setAdapter(mAdapter);
+        mSpellListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Spell spell = mAdapter.getItem(position);
+                Intent i = new Intent(getApplicationContext(), SpellActivity.class);
+                i.putExtra(Spell.ID_SPELL, spell);
+
+                startActivity(i);
+            }
+        });
+
+        //set searchView
+        mSearchView = (SearchView) this.findViewById(R.id.search_spell);
+        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                mAdapter.setSpells(SpellUtils.filterByName(mFilteredList, query));
+                mAdapter.notifyDataSetChanged();
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                mAdapter.setSpells(SpellUtils.filterByName(mFilteredList, newText));
+                mAdapter.notifyDataSetChanged();
+                return false;
+            }
+        });
+
+        //set optionsView
+        mOptionsView = new OptionsView(findViewById(R.id.drawer_filter), this);
     }
 
     @Override
@@ -72,17 +165,37 @@ public class MainActivity extends ActionBarActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+
+        switch(item.getItemId()) {
+            case android.R.id.home:
+                if (mDrawerLayout != null) {
+                    if (mDrawerLayout.isDrawerOpen(Gravity.START)) {
+                        mDrawerLayout.closeDrawer(Gravity.START);
+                    } else {
+                        mDrawerLayout.openDrawer(Gravity.START);
+                    }
+                }
+                return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }
 
-    private class GetJSONObjectTask extends AsyncTask<String, Void, String> {
-        private Context mContext;
-
-        public GetJSONObjectTask(Context context){
-            mContext = context;
+    @Override
+    public void onFilterChanged(ArrayList<ClassType> classList){
+        for(ClassType classType : classList){
+            Log.i("", classType.toString());
         }
+
+        mFilteredList = SpellUtils.filterByClass(mFullList, classList);
+        if (mSearchView.getQuery() != null && mSearchView.getQuery().length() != 0) {
+            SpellUtils.filterByName(mFilteredList, mSearchView.getQuery().toString());
+        }
+        mAdapter.setSpells(mFilteredList);
+        mAdapter.notifyDataSetChanged();
+    }
+
+    private class GetJSONObjectTask extends AsyncTask<String, Void, String> {
 
         @Override
         protected String doInBackground(String... urls) {
@@ -106,6 +219,7 @@ public class MainActivity extends ActionBarActivity {
             return "";
 
         }
+
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {
@@ -115,36 +229,21 @@ public class MainActivity extends ActionBarActivity {
             try {
                 JSONArray array = new JSONArray(result);
 
-                for(int i = 0; i<array.length(); i++){
+                for (int i = 0; i < array.length(); i++) {
                     JSONObject row = array.getJSONObject(i);
                     Spell spell = new Spell();
 
-                    try{
+                    try {
                         spell.populate(row);
                     }
                     //catch exception in single item
-                    catch (JSONException e){
+                    catch (JSONException e) {
                         e.printStackTrace();// todo - temp removed due to to many exceptions. - Clear out json file.
                     }
                     spells.add(spell);
                 }
 
-
-                //sort spells
-                spells = SpellUtils.sortByName(spells);
-                final SpellAdapter adapter = new SpellAdapter(spells, getApplicationContext());
-                mSpellListView.setAdapter(adapter);
-                mSpellListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Spell spell = adapter.getItem(position);
-                        Intent i = new Intent(mContext, SpellActivity.class);
-                        i.putExtra(Spell.ID_SPELL, spell);
-
-                        startActivity(i);
-                    }
-                });
-
+                onSpellListLoaded(spells);
             }
             //catch exception in json Array
             catch (JSONException e) {
