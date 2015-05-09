@@ -3,4 +3,15 @@
     <string name="spell">Spell</string>
 
     <string name="action_settings">Settings</string>
+    <string name="options_classes">Classes</string>
+
+    <!-- class specific strings-->
+    <string name="class_name_bard">Bard</string>
+    <string name="class_name_druid">Druid</string>
+    <string name="class_name_cleric">Cleric</string>
+    <string name="class_name_ranger">Ranger</string>
+    <string name="class_name_paladin">Paladin</string>
+    <string name="class_name_sorcerer">Sorcerer</string>
+    <string name="class_name_warlock">Warlock</string>
+    <string name="class_name_wizard">Wizard</string>
 </resources>

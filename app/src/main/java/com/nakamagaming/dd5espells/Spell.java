@@ -8,6 +8,9 @@ import com.nakamagaming.dd5espells.helpers.ClassType;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 /**
  * Created by Steffan on 03-May-15.
  */
@@ -136,6 +139,29 @@ public class Spell implements Parcelable {
                 String.valueOf(this.mUsableByWizard),
                 String.valueOf(this.mUsableByRanger)
         });
+    }
+
+    public ArrayList<ClassType> getClassTypes() {
+        ArrayList<ClassType> classTypes = new ArrayList<>();
+
+        if (mUsableByBard)
+            classTypes.add(ClassType.BARD);
+        if (mUsableByCleric)
+            classTypes.add(ClassType.CLERIC);
+        if (mUsableByDruid)
+            classTypes.add(ClassType.DRUID);
+        if (mUsableByPaladin)
+            classTypes.add(ClassType.PALADIN);
+        if (mUsableByWarlock)
+            classTypes.add(ClassType.WARLOCK);
+        if (mUsableBySorcerer)
+            classTypes.add(ClassType.SORCERER);
+        if (mUsableByWizard)
+            classTypes.add(ClassType.WIZARD);
+        if (mUsableByRanger)
+            classTypes.add(ClassType.RANGER);
+
+        return classTypes;
     }
 
     public static final Parcelable.Creator<Spell> CREATOR = new Parcelable.Creator<Spell>() {
