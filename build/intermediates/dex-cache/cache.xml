@@ -2,32 +2,32 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\Steffan\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.1.1\support-annotations-22.1.1.jar"
+        jar="D:\Android SDK\extras\android\m2repository\com\android\support\support-annotations\22.1.1\support-annotations-22.1.1.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="01d051a6bfb1218b1db2d3a5af0480ac2c25c42a">
-        <dex dex="C:\Users\Steffan\AndroidStudioProjects\D&amp;D5ESpells\app\build\intermediates\pre-dexed\debug\support-annotations-22.1.1-4c453cdfee18bb3a871224bdd6d0ad1d0eafa8d3.jar" />
+        <dex dex="D:\Android Projects\NKMA-DD5eSpells\app\build\intermediates\pre-dexed\debug\support-annotations-22.1.1-71eea8bf2438444660ada556df76a0b19d84c6c4.jar" />
     </item>
     <item
-        jar="C:\Users\Steffan\AndroidStudioProjects\D&amp;D5ESpells\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.1.1\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="c95ba8152923e4872e86a82cfcba9a51c0214328">
-        <dex dex="C:\Users\Steffan\AndroidStudioProjects\D&amp;D5ESpells\app\build\intermediates\pre-dexed\debug\classes-a51e579a9b977516bb0c7bbaf8053fe1549d5196.jar" />
-    </item>
-    <item
-        jar="C:\Users\Steffan\AndroidStudioProjects\D&amp;D5ESpells\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.1.1\jars\classes.jar"
+        jar="D:\Android Projects\NKMA-DD5eSpells\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.1.1\jars\classes.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="a3ff3c506644c820eb2bdf06e8339f72be578551">
-        <dex dex="C:\Users\Steffan\AndroidStudioProjects\D&amp;D5ESpells\app\build\intermediates\pre-dexed\debug\classes-7c2867526d6c39cb9dcc340079dae84633343116.jar" />
+        <dex dex="D:\Android Projects\NKMA-DD5eSpells\app\build\intermediates\pre-dexed\debug\classes-57c7dd9f36d21eb27f955fabf4c4b5fb847de8a8.jar" />
     </item>
     <item
-        jar="C:\Users\Steffan\AndroidStudioProjects\D&amp;D5ESpells\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.1.1\jars\libs\internal_impl-22.1.1.jar"
+        jar="D:\Android Projects\NKMA-DD5eSpells\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.1.1\jars\libs\internal_impl-22.1.1.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="9e070ad32b2700b0343e8e0cccc437733d91ba3a">
-        <dex dex="C:\Users\Steffan\AndroidStudioProjects\D&amp;D5ESpells\app\build\intermediates\pre-dexed\debug\internal_impl-22.1.1-d1c6f91bb6b962beff79231ce9229c8bf4a06ea0.jar" />
+        <dex dex="D:\Android Projects\NKMA-DD5eSpells\app\build\intermediates\pre-dexed\debug\internal_impl-22.1.1-b3a60b9b68f640dea6d5554f925ebd6d698d0418.jar" />
+    </item>
+    <item
+        jar="D:\Android Projects\NKMA-DD5eSpells\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="c95ba8152923e4872e86a82cfcba9a51c0214328">
+        <dex dex="D:\Android Projects\NKMA-DD5eSpells\app\build\intermediates\pre-dexed\debug\classes-78ddc84bf01ad72b659bdc6e3479ae0a3155bae0.jar" />
     </item>
 
 </items>

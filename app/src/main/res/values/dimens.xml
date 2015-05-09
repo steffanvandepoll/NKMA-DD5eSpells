@@ -7,6 +7,11 @@
     <dimen name="item_content_normal">16sp</dimen>
     <dimen name="item_content_small">12sp</dimen>
 
+    <!--Spell description font sizes -->
+    <dimen name="spell_title">22sp</dimen>
+    <dimen name="spell_level">16sp</dimen>
+    <dimen name="spell_attr_descr">18sp</dimen>
+
     <!-- application spacing variables -->
     <dimen name="class_type_icon_width">10dp</dimen>
     <dimen name="class_type_icon_height">26dp</dimen>

@@ -3,4 +3,10 @@
     <string name="spell">Spell</string>
 
     <string name="action_settings">Settings</string>
+
+    <!--Spell Description string-->
+    <string name="casting_time">Casting Time:</string>
+    <string name="range">Range:</string>
+    <string name="components">Components:</string>
+    <string name="duration">Duration:</string>
 </resources>

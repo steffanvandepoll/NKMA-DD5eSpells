@@ -24,12 +24,30 @@ public class SpellActivity extends ActionBarActivity {
         if (extras != null) {
             Spell spell = extras.getParcelable(Spell.ID_SPELL);
 
-            TextView nameTv = (TextView) this.findViewById(R.id.spell_name);
-            TextView levelTv = (TextView) this.findViewById(R.id.spell_level);
-            TextView descriptionTv = (TextView) this.findViewById(R.id.spell_description);
+            //get all textviews from the page.
+            TextView nameTv         = (TextView)this.findViewById(R.id.spell_name);
+            TextView pageTv         = (TextView)this.findViewById(R.id.spell_page);
+            TextView levelTv        = (TextView)this.findViewById(R.id.spell_level);
+            TextView descriptionTv  = (TextView)this.findViewById(R.id.spell_description);
+            TextView castingTimeTv  = (TextView)this.findViewById(R.id.spell_castingTime);
+            TextView rangeTv        = (TextView)this.findViewById(R.id.spell_range);
+            TextView componentsTv   = (TextView)this.findViewById(R.id.spell_components);
+            TextView durationTv     = (TextView)this.findViewById(R.id.spell_duration);
 
             nameTv.setText(spell.getName());
-            levelTv.setText(String.valueOf(spell.getLevel()));
+            pageTv.setText(String.format("PHB: %d", spell.getPage()));
+            levelTv.setText(formatSpellLevel(spell));
+
+            castingTimeTv.setText(spell.getCastingTime());
+            rangeTv.setText(spell.getRange());
+
+            if(spell.getComponentDescription().length() > 0)
+                componentsTv.setText(String.format("%s (%s)", spell.getComponents(), spell.getComponentDescription()));
+            else
+                componentsTv.setText(spell.getComponents());
+
+            durationTv.setText(spell.getDuration());
+
             descriptionTv.setText(spell.getDescription());
         }
     }
@@ -50,5 +68,35 @@ public class SpellActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private String formatSpellLevel(Spell spell){
+        String returner;
+        String appendix;
+
+        if(spell.getLevel() > 0) {
+            switch (spell.getLevel()) {
+                case 1:
+                    appendix = "st-level";
+                    break;
+                case 2:
+                    appendix = "nd-level";
+                    break;
+                case 3:
+                    appendix = "rd-level";
+                    break;
+                default:
+                    appendix = "th-level";
+                    break;
+            }
+            returner = String.format("%d%s %s", spell.getLevel(), appendix, spell.getSchool());
+        } else {
+            returner = String.format("%s cantrip", spell.getSchool());
+        }
+
+        if(spell.getRitual())
+            returner += " (Ritual)";
+
+        return returner;
     }
 }
