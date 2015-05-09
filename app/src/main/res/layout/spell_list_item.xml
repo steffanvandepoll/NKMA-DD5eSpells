@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="30dp">
+    android:layout_height="30dp"
+    android:paddingBottom="2dp"
+    android:paddingTop="2dp">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -35,66 +37,66 @@
         android:orientation="horizontal"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true">
-        <View
+        <ImageView
             android:layout_width="@dimen/class_type_icon_width"
             android:layout_height="@dimen/class_type_icon_height"
-            android:background="@color/bard"
+            android:src="@drawable/ic_bard_full_big"
             android:id="@+id/class_icon_bard"
             android:layout_marginLeft="@dimen/class_type_icon_margin"
             android:layout_marginStart="@dimen/class_type_icon_margin"
              />
-        <View
+        <ImageView
             android:layout_width="@dimen/class_type_icon_width"
             android:layout_height="@dimen/class_type_icon_height"
-            android:background="@color/cleric"
+            android:src="@drawable/ic_cleric_full_big"
             android:layout_marginLeft="@dimen/class_type_icon_margin"
             android:layout_marginStart="@dimen/class_type_icon_margin"
             android:id="@+id/class_icon_cleric"
             />
-        <View
+        <ImageView
             android:layout_width="@dimen/class_type_icon_width"
             android:layout_height="@dimen/class_type_icon_height"
-            android:background="@color/druid"
+            android:src="@drawable/ic_druid_full_big"
             android:layout_marginLeft="@dimen/class_type_icon_margin"
             android:layout_marginStart="@dimen/class_type_icon_margin"
             android:id="@+id/class_icon_druid"
             />
-        <View
+        <ImageView
             android:layout_width="@dimen/class_type_icon_width"
             android:layout_height="@dimen/class_type_icon_height"
-            android:background="@color/paladin"
+            android:src="@drawable/ic_paladin_full_big"
             android:layout_marginLeft="@dimen/class_type_icon_margin"
             android:layout_marginStart="@dimen/class_type_icon_margin"
             android:id="@+id/class_icon_paladin"
             />
-        <View
+        <ImageView
             android:layout_width="@dimen/class_type_icon_width"
             android:layout_height="@dimen/class_type_icon_height"
-            android:background="@color/ranger"
+            android:src="@drawable/ic_ranger_full_big"
             android:layout_marginLeft="@dimen/class_type_icon_margin"
             android:layout_marginStart="@dimen/class_type_icon_margin"
             android:id="@+id/class_icon_ranger"
             />
-        <View
+        <ImageView
             android:layout_width="@dimen/class_type_icon_width"
             android:layout_height="@dimen/class_type_icon_height"
-            android:background="@color/sorcerer"
+            android:src="@drawable/ic_sorcerer_full_big"
             android:layout_marginLeft="@dimen/class_type_icon_margin"
             android:layout_marginStart="@dimen/class_type_icon_margin"
             android:id="@+id/class_icon_sorcerer"
             />
-        <View
+        <ImageView
             android:layout_width="@dimen/class_type_icon_width"
             android:layout_height="@dimen/class_type_icon_height"
-            android:background="@color/warlock"
+            android:src="@drawable/ic_warlock_full_big"
             android:layout_marginLeft="@dimen/class_type_icon_margin"
             android:layout_marginStart="@dimen/class_type_icon_margin"
             android:id="@+id/class_icon_warlock"
             />
-        <View
+        <ImageView
             android:layout_width="@dimen/class_type_icon_width"
             android:layout_height="@dimen/class_type_icon_height"
-            android:background="@color/wizard"
+            android:src="@drawable/ic_wizard_full_big"
             android:layout_marginLeft="@dimen/class_type_icon_margin"
             android:layout_marginStart="@dimen/class_type_icon_margin"
             android:id="@+id/class_icon_wizard"

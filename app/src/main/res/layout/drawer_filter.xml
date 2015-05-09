@@ -1,73 +1,250 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    android:padding="25dp"
+    android:background="@color/white"
     android:minWidth="175dp"
-    android:background="@color/white">
+    android:orientation="vertical"
+    android:padding="25dp"
+    android:paddingLeft="10dp"
+    android:paddingStart="10dp">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:paddingBottom="10dp"
         android:text="@string/options_classes"
-        android:paddingBottom="10dp"/>
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <CheckBox
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/class_name_bard"
-        android:checked="true"
-        android:id="@+id/checkbox_filter_bard" />
+        android:orientation="horizontal">
 
-    <CheckBox
+        <CheckBox
+            android:id="@+id/checkbox_filter_bard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:layout_gravity="center_vertical"
+             />
+
+        <ImageView
+            android:id="@+id/class_icon_bard"
+            android:layout_width="@dimen/options_class_type_size"
+            android:layout_height="@dimen/options_class_type_size"
+            android:layout_marginRight="@dimen/options_icons_spacing"
+            android:src="@drawable/ic_bard_full_big"
+            android:layout_gravity="center_vertical"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/class_name_bard"
+            android:layout_gravity="center_vertical"/>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:checked="true"
-        android:text="@string/class_name_cleric"
-        android:id="@+id/checkbox_filter_cleric" />
+        android:orientation="horizontal">
 
-    <CheckBox
+        <CheckBox
+            android:id="@+id/checkbox_filter_cleric"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:layout_gravity="center_vertical"
+            />
+
+        <ImageView
+            android:id="@+id/class_icon_cleric"
+            android:layout_width="@dimen/options_class_type_size"
+            android:layout_height="@dimen/options_class_type_size"
+            android:layout_marginRight="@dimen/options_icons_spacing"
+            android:src="@drawable/ic_cleric_full_big"
+            android:layout_gravity="center_vertical"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/class_name_cleric"
+            android:layout_gravity="center_vertical"/>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:checked="true"
-        android:text="@string/class_name_druid"
-        android:id="@+id/checkbox_filter_druid" />
+        android:orientation="horizontal">
 
-    <CheckBox
+        <CheckBox
+            android:id="@+id/checkbox_filter_druid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:layout_gravity="center_vertical"
+            />
+
+        <ImageView
+            android:id="@+id/class_icon_druid"
+            android:layout_width="@dimen/options_class_type_size"
+            android:layout_height="@dimen/options_class_type_size"
+            android:layout_marginRight="@dimen/options_icons_spacing"
+            android:src="@drawable/ic_druid_full_big"
+            android:layout_gravity="center_vertical"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/class_name_druid"
+            android:layout_gravity="center_vertical"/>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:checked="true"
-        android:text="@string/class_name_ranger"
-        android:id="@+id/checkbox_filter_ranger" />
+        android:orientation="horizontal">
 
-    <CheckBox
+        <CheckBox
+            android:id="@+id/checkbox_filter_ranger"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:layout_gravity="center_vertical"
+            />
+
+        <ImageView
+            android:id="@+id/class_icon_ranger"
+            android:layout_width="@dimen/options_class_type_size"
+            android:layout_height="@dimen/options_class_type_size"
+            android:layout_marginRight="@dimen/options_icons_spacing"
+            android:src="@drawable/ic_ranger_full_big"
+            android:layout_gravity="center_vertical"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/class_name_ranger"
+            android:layout_gravity="center_vertical"/>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:checked="true"
-        android:text="@string/class_name_paladin"
-        android:id="@+id/checkbox_filter_paladin" />
+        android:orientation="horizontal">
 
-    <CheckBox
+        <CheckBox
+            android:id="@+id/checkbox_filter_paladin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:layout_gravity="center_vertical"
+            />
+
+        <ImageView
+            android:id="@+id/class_icon_paladin"
+            android:layout_width="@dimen/options_class_type_size"
+            android:layout_height="@dimen/options_class_type_size"
+            android:layout_marginRight="@dimen/options_icons_spacing"
+            android:src="@drawable/ic_paladin_full_big"
+            android:layout_gravity="center_vertical"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/class_name_paladin"
+            android:layout_gravity="center_vertical"/>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:checked="true"
-        android:text="@string/class_name_wizard"
-        android:id="@+id/checkbox_filter_wizard" />
+        android:orientation="horizontal">
 
-    <CheckBox
+        <CheckBox
+            android:id="@+id/checkbox_filter_wizard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:layout_gravity="center_vertical"
+            />
+
+        <ImageView
+            android:id="@+id/class_icon_wizard"
+            android:layout_width="@dimen/options_class_type_size"
+            android:layout_height="@dimen/options_class_type_size"
+            android:layout_marginRight="@dimen/options_icons_spacing"
+            android:src="@drawable/ic_wizard_full_big"
+            android:layout_gravity="center_vertical"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/class_name_wizard"
+            android:layout_gravity="center_vertical"/>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:checked="true"
-        android:text="@string/class_name_warlock"
-        android:id="@+id/checkbox_filter_warlock" />
+        android:orientation="horizontal">
 
-    <CheckBox
+        <CheckBox
+            android:id="@+id/checkbox_filter_warlock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:layout_gravity="center_vertical"
+            />
+
+        <ImageView
+            android:id="@+id/class_icon_warlock"
+            android:layout_width="@dimen/options_class_type_size"
+            android:layout_height="@dimen/options_class_type_size"
+            android:layout_marginRight="@dimen/options_icons_spacing"
+            android:src="@drawable/ic_warlock_full_big"
+            android:layout_gravity="center_vertical"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/class_name_warlock"
+            android:layout_gravity="center_vertical"/>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:checked="true"
-        android:text="@string/class_name_sorcerer"
-        android:id="@+id/checkbox_filter_sorcerer" />
+        android:orientation="horizontal">
 
+        <CheckBox
+            android:id="@+id/checkbox_filter_sorcerer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:layout_gravity="center_vertical"
+            />
+
+        <ImageView
+            android:id="@+id/class_icon_sorcerer"
+            android:layout_width="@dimen/options_class_type_size"
+            android:layout_height="@dimen/options_class_type_size"
+            android:layout_marginRight="@dimen/options_icons_spacing"
+            android:src="@drawable/ic_sorcerer_full_big"
+            android:layout_gravity="center_vertical"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/class_name_sorcerer"
+            android:layout_gravity="center_vertical"/>
+
+    </LinearLayout>
 </LinearLayout>

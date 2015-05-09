@@ -22,7 +22,7 @@ public class SpellActivity extends ActionBarActivity {
         extras.setClassLoader(Spell.class.getClassLoader());
 
         if (extras != null) {
-            Spell spell = extras.getParcelable(Spell.ID_SPELL);
+            mSpell = extras.getParcelable(Spell.ID_SPELL);
 
             //get all textviews from the page.
             TextView nameTv         = (TextView)this.findViewById(R.id.spell_name);
@@ -34,29 +34,41 @@ public class SpellActivity extends ActionBarActivity {
             TextView componentsTv   = (TextView)this.findViewById(R.id.spell_components);
             TextView durationTv     = (TextView)this.findViewById(R.id.spell_duration);
 
-            nameTv.setText(spell.getName());
-            pageTv.setText(String.format("PHB: %d", spell.getPage()));
-            levelTv.setText(formatSpellLevel(spell));
+            nameTv.setText(mSpell.getName());
+            pageTv.setText(String.format("PHB: %d", mSpell.getPage()));
+            levelTv.setText(formatSpellLevel(mSpell));
 
-            castingTimeTv.setText(spell.getCastingTime());
-            rangeTv.setText(spell.getRange());
+            castingTimeTv.setText(mSpell.getCastingTime());
+            rangeTv.setText(mSpell.getRange());
 
-            if(spell.getComponentDescription().length() > 0)
-                componentsTv.setText(String.format("%s (%s)", spell.getComponents(), spell.getComponentDescription()));
+            if(mSpell.getComponentDescription().length() > 0)
+                componentsTv.setText(String.format("%s (%s)", mSpell.getComponents(), mSpell.getComponentDescription()));
             else
-                componentsTv.setText(spell.getComponents());
+                componentsTv.setText(mSpell.getComponents());
 
-            durationTv.setText(spell.getDuration());
+            durationTv.setText(mSpell.getDuration());
 
-            descriptionTv.setText(spell.getDescription());
+            descriptionTv.setText(mSpell.getDescription());
         }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_spell, menu);
 
+        if(mSpell != null) {
+            menu.getItem(0).setVisible(mSpell.isUsableByBard());
+            menu.getItem(1).setVisible(mSpell.isUsableByCleric());
+            menu.getItem(2).setVisible(mSpell.isUsableByDruid());
+            menu.getItem(3).setVisible(mSpell.isUsableByPaladin());
+            menu.getItem(4).setVisible(mSpell.isUsableByRanger());
+            menu.getItem(5).setVisible(mSpell.isUsableByWizard());
+            menu.getItem(6).setVisible(mSpell.isUsableBySorcerer());
+            menu.getItem(7).setVisible(mSpell.isUsableByWarlock());
+        }
+
+        mSpell.getName();
         return true;
     }
 

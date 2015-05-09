@@ -2,7 +2,15 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+        <item name="android:actionButtonStyle">@style/ActionButtonStyle</item>
+        <item name="homeAsUpIndicator">@drawable/ic_drawer</item>
+        <item name="android:homeAsUpIndicator">@drawable/ic_drawer</item>
+    </style>
+
+    <style name="ActionButtonStyle" parent="@android:style/Widget.Holo.Light.ActionButton">
+        <item name="android:minWidth">0dip</item>
+        <item name="android:paddingLeft">0dip</item>
+        <item name="android:paddingRight">0dip</item>
     </style>
 
 </resources>

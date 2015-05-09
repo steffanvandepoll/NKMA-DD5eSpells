@@ -2,6 +2,7 @@ package com.nakamagaming.dd5espells;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -35,7 +36,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
-public class MainActivity extends ActionBarActivity implements IFilterChangeListener{
+public class MainActivity extends ActionBarActivity implements IFilterChangeListener {
 
     private final String mSpreadSheetID = "15ylLqPEwtpdwpKPp6HTvzlmaDogkBGe2w29b9RtxaiA";
     private ListView mSpellListView;
@@ -51,17 +52,6 @@ public class MainActivity extends ActionBarActivity implements IFilterChangeList
     private SpellAdapter mAdapter;
     private OptionsView mOptionsView;
 
-    /*
-    TODO list
-    - usability
-        - class filter - make draw layout.
-
-    - design
-        - list item
-            - replace colored lines with icons
-        - spell details
-     */
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,20 +59,7 @@ public class MainActivity extends ActionBarActivity implements IFilterChangeList
         //set nakama spash screen.
         setContentView(R.layout.activity_main);
 
-        mFullList = new ArrayList<>();
-        new GetJSONObjectTask().execute();
-    }
-
-    public void onSpellListLoaded(ArrayList<Spell> spells) {
-        //here we should start the correct view
-
-        //init vars
-        mFullList = SpellUtils.sortByName(spells);
-        mFilteredList = new ArrayList<>(mFullList);
-        mAdapter = new SpellAdapter(mFullList, getApplicationContext());
-
-        //set drawerlayout
-        mDrawerLayout = (DrawerLayout)findViewById(R.id.main_drawer_layout);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.main_drawer_layout);
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_drawer, R.string.app_name, R.string.app_name) {
 
             /** Called when a drawer has settled in a completely closed state. */
@@ -104,15 +81,27 @@ public class MainActivity extends ActionBarActivity implements IFilterChangeList
 
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
-        try{
+        try {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setHomeButtonEnabled(true);
-        }
-        catch (NullPointerException e){
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        } catch (NullPointerException e) {
 
         }
 
         mDrawerToggle.syncState();
+
+        mFullList = new ArrayList<>();
+        new GetJSONObjectTask().execute();
+    }
+
+    public void onSpellListLoaded(ArrayList<Spell> spells) {
+        //here we should start the correct view
+
+        //init vars
+        mFullList = SpellUtils.sortByName(spells);
+        mFilteredList = new ArrayList<>(mFullList);
+        mAdapter = new SpellAdapter(mFullList, getApplicationContext());
 
         //set listView
         mSpellListView = (ListView) this.findViewById(R.id.spell_list);
@@ -123,7 +112,6 @@ public class MainActivity extends ActionBarActivity implements IFilterChangeList
                 Spell spell = mAdapter.getItem(position);
                 Intent i = new Intent(getApplicationContext(), SpellActivity.class);
                 i.putExtra(Spell.ID_SPELL, spell);
-
                 startActivity(i);
             }
         });
@@ -153,10 +141,23 @@ public class MainActivity extends ActionBarActivity implements IFilterChangeList
     }
 
     @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        mDrawerToggle.syncState();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
     @Override
@@ -165,7 +166,7 @@ public class MainActivity extends ActionBarActivity implements IFilterChangeList
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
 
-        switch(item.getItemId()) {
+        switch (item.getItemId()) {
             case android.R.id.home:
                 if (mDrawerLayout != null) {
                     if (mDrawerLayout.isDrawerOpen(Gravity.START)) {
@@ -181,7 +182,7 @@ public class MainActivity extends ActionBarActivity implements IFilterChangeList
     }
 
     @Override
-    public void onFilterChanged(ArrayList<ClassType> classList){
+    public void onFilterChanged(ArrayList<ClassType> classList) {
         mFilteredList = SpellUtils.filterByClass(mFullList, classList);
         if (mSearchView.getQuery() != null && mSearchView.getQuery().length() != 0) {
             mFilteredList = SpellUtils.filterByName(mFilteredList, mSearchView.getQuery().toString());

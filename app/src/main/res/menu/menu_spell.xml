@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="schemas.android.com/tools"
+    tools:context="com.nakamagaming.dd5espells.SpellActivity"
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
+
+<item android:id="@+id/menu_class_icon_bard"
+        android:icon="@drawable/ic_bard_full_small"
+        android:title=""
+        app:showAsAction="always"
+
+        />
+    <item android:id="@+id/menu_class_icon_cleric"
+        android:icon="@drawable/ic_cleric_full_small"
+        android:title=""
+        app:showAsAction="always"
+        />
+    <item android:id="@+id/menu_class_icon_druid"
+        android:icon="@drawable/ic_druid_full_small"
+        android:title=""
+        app:showAsAction="always"
+        />
+    <item android:id="@+id/menu_class_icon_paladin"
+        android:icon="@drawable/ic_paladin_full_small"
+        android:title=""
+        app:showAsAction="always"
+        />
+    <item android:id="@+id/menu_class_icon_ranger"
+        android:icon="@drawable/ic_ranger_full_small"
+        android:title=""
+        app:showAsAction="always"
+        />
+    <item android:id="@+id/menu_class_icon_wizard"
+        android:icon="@drawable/ic_wizard_full_small"
+        android:title=""
+        app:showAsAction="always"
+        />
+    <item android:id="@+id/menu_class_icon_sorcerer"
+        android:icon="@drawable/ic_sorcerer_full_small"
+        android:title=""
+        app:showAsAction="always"
+        />
+    <item android:id="@+id/menu_class_icon_warlock"
+        android:icon="@drawable/ic_warlock_full_small"
+        android:title=""
+        app:showAsAction="always"
+        />
+</menu>
