@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="30dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical" >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/spell_name"
+            android:textColor="@color/black"
+            android:gravity="bottom"
+            android:layout_marginRight="5dp"
+            android:text="spell name"
+            android:textSize="@dimen/item_content_normal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/spell_level"
+            android:textColor="@color/grey"
+            android:gravity="bottom"
+            android:text="spell level"
+            android:textSize="@dimen/item_content_small" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true">
+        <View
+            android:layout_width="@dimen/class_type_icon_width"
+            android:layout_height="@dimen/class_type_icon_height"
+            android:background="@color/bard"
+            android:id="@+id/class_icon_bard"
+            android:layout_marginLeft="@dimen/class_type_icon_margin"
+            android:layout_marginStart="@dimen/class_type_icon_margin"
+             />
+        <View
+            android:layout_width="@dimen/class_type_icon_width"
+            android:layout_height="@dimen/class_type_icon_height"
+            android:background="@color/cleric"
+            android:layout_marginLeft="@dimen/class_type_icon_margin"
+            android:layout_marginStart="@dimen/class_type_icon_margin"
+            android:id="@+id/class_icon_cleric"
+            />
+        <View
+            android:layout_width="@dimen/class_type_icon_width"
+            android:layout_height="@dimen/class_type_icon_height"
+            android:background="@color/druid"
+            android:layout_marginLeft="@dimen/class_type_icon_margin"
+            android:layout_marginStart="@dimen/class_type_icon_margin"
+            android:id="@+id/class_icon_druid"
+            />
+        <View
+            android:layout_width="@dimen/class_type_icon_width"
+            android:layout_height="@dimen/class_type_icon_height"
+            android:background="@color/paladin"
+            android:layout_marginLeft="@dimen/class_type_icon_margin"
+            android:layout_marginStart="@dimen/class_type_icon_margin"
+            android:id="@+id/class_icon_paladin"
+            />
+        <View
+            android:layout_width="@dimen/class_type_icon_width"
+            android:layout_height="@dimen/class_type_icon_height"
+            android:background="@color/ranger"
+            android:layout_marginLeft="@dimen/class_type_icon_margin"
+            android:layout_marginStart="@dimen/class_type_icon_margin"
+            android:id="@+id/class_icon_ranger"
+            />
+        <View
+            android:layout_width="@dimen/class_type_icon_width"
+            android:layout_height="@dimen/class_type_icon_height"
+            android:background="@color/sorcerer"
+            android:layout_marginLeft="@dimen/class_type_icon_margin"
+            android:layout_marginStart="@dimen/class_type_icon_margin"
+            android:id="@+id/class_icon_sorcerer"
+            />
+        <View
+            android:layout_width="@dimen/class_type_icon_width"
+            android:layout_height="@dimen/class_type_icon_height"
+            android:background="@color/warlock"
+            android:layout_marginLeft="@dimen/class_type_icon_margin"
+            android:layout_marginStart="@dimen/class_type_icon_margin"
+            android:id="@+id/class_icon_warlock"
+            />
+        <View
+            android:layout_width="@dimen/class_type_icon_width"
+            android:layout_height="@dimen/class_type_icon_height"
+            android:background="@color/wizard"
+            android:layout_marginLeft="@dimen/class_type_icon_margin"
+            android:layout_marginStart="@dimen/class_type_icon_margin"
+            android:id="@+id/class_icon_wizard"
+            />
+
+    </LinearLayout>
+
+</RelativeLayout>
