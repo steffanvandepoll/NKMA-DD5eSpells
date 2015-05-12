@@ -28,7 +28,7 @@ public class SpellUtils {
         //return full list if we're not filtering anyway.
         if (text == null || text.isEmpty())
             return list;
-
+        text=text.toLowerCase();
         for (Spell spell : list) {
             //name is case sensitive
             String name = spell.getName().toLowerCase();

@@ -4,14 +4,14 @@ package com.nakamagaming.dd5espells.helpers;
  * Created by Steffan on 7-5-2015.
  */
 public enum ClassType {
-    BARD("bard"),
-    CLERIC("cleric"),
-    DRUID("druid"),
-    PALADIN("paladin"),
-    RANGER("ranger"),
-    SORCERER("sorcerer"),
-    WARLOCK("warlock"),
-    WIZARD("wizard")
+    BARD("Bard"),
+    CLERIC("Bleric"),
+    DRUID("Druid"),
+    PALADIN("Paladin"),
+    RANGER("Ranger"),
+    SORCERER("Sorcerer"),
+    WARLOCK("Warlock"),
+    WIZARD("Wizard")
     ;
     private final String classType;
 
