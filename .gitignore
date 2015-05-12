@@ -39,5 +39,4 @@ local.properties
 *.bin
 /*/build
 */dex-cache/cache.xml
-/build/intermediates/dex-cache/cache.xml
-build
+/build
