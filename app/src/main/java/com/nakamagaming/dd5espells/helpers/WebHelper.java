@@ -14,11 +14,11 @@ import java.net.URL;
  */
 public class WebHelper {
 
-    private static final String GOOGLE_API_SPREADSHEET_URL = "https://spreadsheets.google.com/feeds/list/";
-    private static final String GOOGLE_API_TYPE_JSON = "/od6/public/basic?alt=json";
+    private static final String GOOGLE_API_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbycYXE0ixzCA37uBNv8HxarEU4PgKK2Z8hMAXVLPFpMosMIi7UF/exec?id=";
+    private static final String GOOGLE_SPREADSHEET_SHEET = "&sheet=Spells";
 
     public String getGoogleSpreadsheetByID(String id) throws IOException{
-        String url = GOOGLE_API_SPREADSHEET_URL + id + GOOGLE_API_TYPE_JSON;
+        String url = GOOGLE_API_WEBAPP_URL + id + GOOGLE_SPREADSHEET_SHEET;
         String webPage = "";
 
         HttpURLConnection urlConnection = (HttpURLConnection) new URL(url).openConnection();

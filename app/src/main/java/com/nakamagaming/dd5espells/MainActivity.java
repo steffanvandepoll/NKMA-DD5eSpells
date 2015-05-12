@@ -223,7 +223,8 @@ public class MainActivity extends ActionBarActivity implements IFilterChangeList
             ArrayList<Spell> spells = new ArrayList<Spell>();
 
             try {
-                JSONArray array = new JSONArray(result);
+                JSONObject object = new JSONObject(result);
+                JSONArray array = object.getJSONArray("Spells");
 
                 for (int i = 0; i < array.length(); i++) {
                     JSONObject row = array.getJSONObject(i);

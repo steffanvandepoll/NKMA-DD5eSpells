@@ -16,18 +16,18 @@ import java.util.ArrayList;
  */
 public class Spell implements Parcelable {
 
-    public static final String ID_SPELL = "spell";
-    public static final String TYPE_NAME = "name";
-    public static final String TYPE_LEVEL = "level";
-    public static final String TYPE_SCHOOL = "school";
-    public static final String TYPE_RITUAL = "ritual";
-    public static final String TYPE_CASTING_TIME = "castingtime";
-    public static final String TYPE_RANGE = "range";
-    public static final String TYPE_COMPONENTS = "components";
-    public static final String TYPE_COMP_DESCRIPTION = "compdescr";
-    public static final String TYPE_DURATION = "duration";
-    public static final String TYPE_PAGE = "page";
-    public static final String TYPE_DESCRIPTION = "description";
+    public static final String ID_SPELL = "Spell";
+    public static final String TYPE_NAME = "Name";
+    public static final String TYPE_LEVEL = "Level";
+    public static final String TYPE_SCHOOL = "School";
+    public static final String TYPE_RITUAL = "Ritual";
+    public static final String TYPE_CASTING_TIME = "Casting_Time";
+    public static final String TYPE_RANGE = "Range";
+    public static final String TYPE_COMPONENTS = "Components";
+    public static final String TYPE_COMP_DESCRIPTION = "CompDescr";
+    public static final String TYPE_DURATION = "Duration";
+    public static final String TYPE_PAGE = "Page";
+    public static final String TYPE_DESCRIPTION = "Description";
 
     private String mName;
     private String mDescription;
