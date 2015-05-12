@@ -38,3 +38,4 @@ local.properties
 *.swp
 *.bin
 /*/build
+*/dex-cache/cache.xml
