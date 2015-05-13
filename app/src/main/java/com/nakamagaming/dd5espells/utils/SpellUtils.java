@@ -22,6 +22,16 @@ public class SpellUtils {
         return list;
     }
 
+    public static ArrayList<Spell> sortByLevel(ArrayList<Spell> list) {
+        Collections.sort(list, new Comparator<Spell>() {
+            @Override
+            public int compare(Spell s1, Spell s2) {
+                return String.valueOf(s1.getLevel()).compareToIgnoreCase(String.valueOf(s2.getLevel()));
+            }
+        });
+        return list;
+    }
+
     public static ArrayList<Spell> filterByName(ArrayList<Spell> list, String text) {
         ArrayList<Spell> result = new ArrayList<>();
 

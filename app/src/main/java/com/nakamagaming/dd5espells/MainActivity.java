@@ -100,6 +100,7 @@ public class MainActivity extends ActionBarActivity implements IFilterChangeList
 
         //init vars
         mFullList = SpellUtils.sortByName(spells);
+        mFullList = SpellUtils.sortByLevel(spells);
         mFilteredList = new ArrayList<>(mFullList);
         mAdapter = new SpellAdapter(mFullList, getApplicationContext());
 
