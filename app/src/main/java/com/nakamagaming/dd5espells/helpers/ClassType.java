@@ -5,7 +5,7 @@ package com.nakamagaming.dd5espells.helpers;
  */
 public enum ClassType {
     BARD("Bard"),
-    CLERIC("Bleric"),
+    CLERIC("Cleric"),
     DRUID("Druid"),
     PALADIN("Paladin"),
     RANGER("Ranger"),
