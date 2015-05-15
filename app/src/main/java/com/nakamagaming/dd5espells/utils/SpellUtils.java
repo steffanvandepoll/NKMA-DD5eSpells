@@ -56,6 +56,7 @@ public class SpellUtils {
             for(ClassType classType : spell.getClassTypes()){
                 if(classTypes.contains(classType))
                     result.add(spell);
+                    break;
             }
         }
 
