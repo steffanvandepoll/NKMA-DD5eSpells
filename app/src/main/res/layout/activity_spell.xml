@@ -1,180 +1,190 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
-
-    <!-- Title layout-->
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        >
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Disguise Self"
-                android:id="@+id/spell_name"
-                android:layout_gravity="left"
-                android:textStyle="bold"
-                android:textSize="@dimen/spell_title"/>
-
-
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="(Page 214)"
-                android:id="@+id/spell_page"
-                android:alpha=".5"
-                android:textSize="@dimen/spell_level"
-                android:layout_gravity="center_horizontal" />
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="1st-level illusion"
-            android:id="@+id/spell_level"
-            android:alpha=".8"
-            android:textStyle="italic"
-            android:textSize="@dimen/spell_level"/>
-
-    </LinearLayout>
-
-    <!--Attribute Layout-->
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        >
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/casting_time"
-                android:id="@+id/textView"
-                android:textStyle="bold"
-                android:textSize="@dimen/spell_attr_descr"
-                android:paddingRight="7dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="1 action"
-                android:id="@+id/spell_castingTime" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/range"
-                android:id="@+id/textView2"
-                android:textStyle="bold"
-                android:textSize="@dimen/spell_attr_descr"
-                android:paddingRight="7dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Self"
-                android:id="@+id/spell_range" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/components"
-                android:id="@+id/textView3"
-                android:textStyle="bold"
-                android:textSize="@dimen/spell_attr_descr"
-                android:paddingRight="7dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:id="@+id/spell_components"
-                android:text="V, S" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/duration"
-                android:id="@+id/textView4"
-                android:textStyle="bold"
-                android:textSize="@dimen/spell_attr_descr"
-                android:paddingRight="7dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="1 hour"
-                android:id="@+id/spell_duration" />
-        </LinearLayout>
-    </LinearLayout>
+    tools:context=".MainActivity">
 
     <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/scrollView" >
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            >
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <!-- Title layout-->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="You make yourself—including your clothing, armor,  w eapons, and other belongings on your person—look   different until the spell ends or until you use your action   to dism iss it. You can seem 1 foot shorter or taller and   can appear thin, fat, or in between. You can’t change   your body type, so you must adopt a form that has the   sam e basic arrangement of limbs. Otherwise, the extent   of the illusion is up to you.  The changes wrought by this spell fail to hold up to   physical inspection. For example, if you use this spell   to add a hat to your outfit, objects pass through the hat,   and anyone w ho touches it w ould feel nothing or would   feel your head and hair. If you use this spell to appear   thinner than you are, the hand of som eone who reaches   out to touch you would bump into you while it was   seem ingly still in midair.  To discern that you are disguised, a creature can use   its action to inspect your appearance and must succeed   on an Intelligence (Investigation) check against your   spell save DC."
-                android:id="@+id/spell_description"
-                android:layout_gravity="left" />
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/spell_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left"
+                        android:text="Disguise Self"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textSize="@dimen/spell_title"
+                        android:textStyle="bold" />
+
+
+                    <TextView
+                        android:id="@+id/spell_page"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:alpha=".5"
+                        android:gravity="right"
+                        android:text="(Page 214)"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textSize="@dimen/spell_level" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/spell_level"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:alpha=".8"
+                    android:text="1st-level illusion"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textSize="@dimen/spell_level"
+                    android:textStyle="italic" />
+
+            </LinearLayout>
+
+            <!--Attribute Layout-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="7dp"
+                        android:text="@string/casting_time"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textSize="@dimen/spell_attr_descr"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/spell_castingTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1 action"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="7dp"
+                        android:text="@string/range"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textSize="@dimen/spell_attr_descr"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/spell_range"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Self"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="7dp"
+                        android:text="@string/components"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textSize="@dimen/spell_attr_descr"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/spell_components"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="V, S"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="7dp"
+                        android:text="@string/duration"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textSize="@dimen/spell_attr_descr"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/spell_duration"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1 hour"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/scrollView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/spell_description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left"
+                        android:text="You make yourself—including your clothing, armor,  w eapons, and other belongings on your person—look   different until the spell ends or until you use your action   to dism iss it. You can seem 1 foot shorter or taller and   can appear thin, fat, or in between. You can’t change   your body type, so you must adopt a form that has the   sam e basic arrangement of limbs. Otherwise, the extent   of the illusion is up to you.  The changes wrought by this spell fail to hold up to   physical inspection. For example, if you use this spell   to add a hat to your outfit, objects pass through the hat,   and anyone w ho touches it w ould feel nothing or would   feel your head and hair. If you use this spell to appear   thinner than you are, the hand of som eone who reaches   out to touch you would bump into you while it was   seem ingly still in midair.  To discern that you are disguised, a creature can use   its action to inspect your appearance and must succeed   on an Intelligence (Investigation) check against your   spell save DC."
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
