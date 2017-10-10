@@ -10,7 +10,6 @@ import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,8 +30,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
@@ -43,13 +40,13 @@ public class MainActivity extends ActionBarActivity implements IFilterChangeList
     private SearchView mSearchView;
     private DrawerLayout mDrawerLayout;
 
-    private ArrayList<Spell> mFullList;
-    private ArrayList<Spell> mFilteredList;
+    private ArrayList<Spell> mFullSpellList;
+    private ArrayList<Spell> mFilteredSpellList;
     private ArrayList<ClassType> mFilteredClasses;
 
     private ActionBarDrawerToggle mDrawerToggle;
 
-    private SpellAdapter mAdapter;
+    private SpellAdapter mSpellAdapter;
     private OptionsView mOptionsView;
 
     @Override
@@ -91,7 +88,7 @@ public class MainActivity extends ActionBarActivity implements IFilterChangeList
 
         mDrawerToggle.syncState();
 
-        mFullList = new ArrayList<>();
+        mFullSpellList = new ArrayList<>();
         new GetJSONObjectTask().execute();
     }
 
@@ -99,18 +96,18 @@ public class MainActivity extends ActionBarActivity implements IFilterChangeList
         //here we should start the correct view
 
         //init vars
-        mFullList = SpellUtils.sortByName(spells);
-        mFullList = SpellUtils.sortByLevel(spells);
-        mFilteredList = new ArrayList<>(mFullList);
-        mAdapter = new SpellAdapter(mFullList, getApplicationContext());
+        mFullSpellList = SpellUtils.sortByName(spells);
+        mFullSpellList = SpellUtils.sortByLevel(spells);
+        mFilteredSpellList = new ArrayList<>(mFullSpellList);
+        mSpellAdapter = new SpellAdapter(mFullSpellList, getApplicationContext());
 
         //set listView
         mSpellListView = (ListView) this.findViewById(R.id.spell_list);
-        mSpellListView.setAdapter(mAdapter);
+        mSpellListView.setAdapter(mSpellAdapter);
         mSpellListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Spell spell = mAdapter.getItem(position);
+                Spell spell = mSpellAdapter.getItem(position);
                 Intent i = new Intent(getApplicationContext(), SpellActivity.class);
                 i.putExtra(Spell.ID_SPELL, spell);
                 startActivity(i);
@@ -124,15 +121,15 @@ public class MainActivity extends ActionBarActivity implements IFilterChangeList
 
             @Override
             public boolean onQueryTextSubmit(String query) {
-                mAdapter.setSpells(SpellUtils.filterByName(mFilteredList, query));
-                mAdapter.notifyDataSetChanged();
+                mSpellAdapter.setSpells(SpellUtils.filterByName(mFilteredSpellList, query));
+                mSpellAdapter.notifyDataSetChanged();
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                mAdapter.setSpells(SpellUtils.filterByName(mFilteredList, newText));
-                mAdapter.notifyDataSetChanged();
+                mSpellAdapter.setSpells(SpellUtils.filterByName(mFilteredSpellList, newText));
+                mSpellAdapter.notifyDataSetChanged();
                 return false;
             }
         });
@@ -184,12 +181,17 @@ public class MainActivity extends ActionBarActivity implements IFilterChangeList
 
     @Override
     public void onFilterChanged(ArrayList<ClassType> classList) {
-        mFilteredList = SpellUtils.filterByClass(mFullList, classList);
+        // first, filter spells by class.
+        mFilteredSpellList = SpellUtils.filterByClass(mFullSpellList, classList);
+
+        // then by the search field (if applicable)
         if (mSearchView.getQuery() != null && mSearchView.getQuery().length() != 0) {
-            mFilteredList = SpellUtils.filterByName(mFilteredList, mSearchView.getQuery().toString());
+            mFilteredSpellList = SpellUtils.filterByName(mFilteredSpellList, mSearchView.getQuery().toString());
         }
-        mAdapter.setSpells(mFilteredList);
-        mAdapter.notifyDataSetChanged();
+
+        // display new list and send out event.
+        mSpellAdapter.setSpells(mFilteredSpellList);
+        mSpellAdapter.notifyDataSetChanged();
     }
 
     private class GetJSONObjectTask extends AsyncTask<String, Void, String> {

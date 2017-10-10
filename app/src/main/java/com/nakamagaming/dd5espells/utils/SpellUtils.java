@@ -1,5 +1,7 @@
 package com.nakamagaming.dd5espells.utils;
 
+import android.util.Log;
+
 import com.nakamagaming.dd5espells.Spell;
 import com.nakamagaming.dd5espells.helpers.ClassType;
 
@@ -54,9 +56,10 @@ public class SpellUtils {
 
         for (Spell spell : list) {
             for(ClassType classType : spell.getClassTypes()){
-                if(classTypes.contains(classType))
+                if(classTypes.contains(classType)) {
                     result.add(spell);
                     break;
+                }
             }
         }
 
