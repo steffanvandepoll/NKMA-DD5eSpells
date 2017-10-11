@@ -35,6 +35,9 @@ public class SpellUtils {
     }
 
     public static ArrayList<Spell> filterByName(ArrayList<Spell> list, String text) {
+        if(text == null || text.length() < 1)
+            return list;
+
         ArrayList<Spell> result = new ArrayList<>();
 
         //return full list if we're not filtering anyway.
@@ -61,6 +64,17 @@ public class SpellUtils {
                     break;
                 }
             }
+        }
+
+        return result;
+    }
+
+    public static ArrayList<Spell> filterByLevel(ArrayList<Spell> list, int minLevel, int maxLevel){
+        ArrayList<Spell> result = new ArrayList<Spell>();
+
+        for (Spell spell : list ) {
+            if(spell.getLevel() >= minLevel && spell.getLevel() <= maxLevel)
+                result.add(spell);
         }
 
         return result;

@@ -3,6 +3,8 @@ package com.nakamagaming.dd5espells.views;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
 import com.nakamagaming.dd5espells.R;
 import com.nakamagaming.dd5espells.helpers.ClassType;
@@ -17,6 +19,12 @@ public class OptionsView {
 
     private ArrayList<ClassType> mFilteredClasses;
     private IFilterChangeListener mListener;
+
+    private SeekBar minLevelBar;
+    private SeekBar maxLevelBar;
+
+    private TextView minLvlTxt;
+    private TextView maxLvlTxt;
 
     public OptionsView(View view, IFilterChangeListener listener) {
         //initiate filterable list.
@@ -55,6 +63,15 @@ public class OptionsView {
 
         CheckBox warlockCB = (CheckBox) view.findViewById(R.id.checkbox_filter_warlock);
         warlockCB.setOnCheckedChangeListener(new OnClassTypeCheckedChangeListener(ClassType.WARLOCK));
+
+        minLevelBar = (SeekBar)view.findViewById(R.id.seekBar_min_lvl);
+        minLevelBar.setOnSeekBarChangeListener(new OnLevelSeekBarChangeListener(true));
+
+        maxLevelBar = (SeekBar)view.findViewById(R.id.seekBar_max_lvl);
+        maxLevelBar.setOnSeekBarChangeListener(new OnLevelSeekBarChangeListener(false));
+
+        minLvlTxt = (TextView)view.findViewById(R.id.textView_min_lvl);
+        maxLvlTxt = (TextView)view.findViewById(R.id.textView_max_lvl);
     }
 
     private class OnClassTypeCheckedChangeListener implements CompoundButton.OnCheckedChangeListener {
@@ -72,6 +89,42 @@ public class OptionsView {
                 mFilteredClasses.add(mClassType);
             }
             mListener.onFilterChanged(mFilteredClasses);
+        }
+    }
+
+    private class OnLevelSeekBarChangeListener implements SeekBar.OnSeekBarChangeListener {
+        private boolean isMin;
+
+        public OnLevelSeekBarChangeListener(boolean isMin){
+            this.isMin = isMin;
+        }
+
+        @Override
+        public void onProgressChanged(SeekBar bar, int value, boolean fromUser){
+            if(isMin) {
+                mListener.onMinLevelChanged(value);
+                minLvlTxt.setText(String.valueOf(value));
+
+                if(value > maxLevelBar.getProgress())
+                    maxLevelBar.setProgress(value);
+            }
+            else {
+                mListener.onMaxLevelChanged(value);
+                maxLvlTxt.setText(String.valueOf(value));
+
+                if(value < minLevelBar.getProgress())
+                    minLevelBar.setProgress(value);
+            }
+        }
+
+        @Override
+        public void onStartTrackingTouch(SeekBar bar){
+            // do nothing.
+        }
+
+        @Override
+        public void onStopTrackingTouch(SeekBar bar){
+            // do nothing.
         }
     }
 }

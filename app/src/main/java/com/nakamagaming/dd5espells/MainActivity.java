@@ -10,6 +10,7 @@ import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -42,12 +43,13 @@ public class MainActivity extends ActionBarActivity implements IFilterChangeList
 
     private ArrayList<Spell> mFullSpellList;
     private ArrayList<Spell> mFilteredSpellList;
-    private ArrayList<ClassType> mFilteredClasses;
+    private SpellFilter mCurrentSpellFilter;
 
     private ActionBarDrawerToggle mDrawerToggle;
 
     private SpellAdapter mSpellAdapter;
     private OptionsView mOptionsView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +102,7 @@ public class MainActivity extends ActionBarActivity implements IFilterChangeList
         mFullSpellList = SpellUtils.sortByLevel(spells);
         mFilteredSpellList = new ArrayList<>(mFullSpellList);
         mSpellAdapter = new SpellAdapter(mFullSpellList, getApplicationContext());
+        mCurrentSpellFilter = new SpellFilter();
 
         //set listView
         mSpellListView = (ListView) this.findViewById(R.id.spell_list);
@@ -121,15 +124,15 @@ public class MainActivity extends ActionBarActivity implements IFilterChangeList
 
             @Override
             public boolean onQueryTextSubmit(String query) {
-                mSpellAdapter.setSpells(SpellUtils.filterByName(mFilteredSpellList, query));
-                mSpellAdapter.notifyDataSetChanged();
+                mCurrentSpellFilter.setText(query);
+                RefreshSpellList();
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                mSpellAdapter.setSpells(SpellUtils.filterByName(mFilteredSpellList, newText));
-                mSpellAdapter.notifyDataSetChanged();
+                mCurrentSpellFilter.setText(newText);
+                RefreshSpellList();
                 return false;
             }
         });
@@ -181,13 +184,31 @@ public class MainActivity extends ActionBarActivity implements IFilterChangeList
 
     @Override
     public void onFilterChanged(ArrayList<ClassType> classList) {
-        // first, filter spells by class.
-        mFilteredSpellList = SpellUtils.filterByClass(mFullSpellList, classList);
+        mCurrentSpellFilter.setClasses(classList);
+        RefreshSpellList();
+    }
 
-        // then by the search field (if applicable)
-        if (mSearchView.getQuery() != null && mSearchView.getQuery().length() != 0) {
-            mFilteredSpellList = SpellUtils.filterByName(mFilteredSpellList, mSearchView.getQuery().toString());
-        }
+    @Override
+    public void onMinLevelChanged(int minLevel){
+        mCurrentSpellFilter.setMinLevel(minLevel);
+        RefreshSpellList();
+    }
+
+    @Override
+    public void onMaxLevelChanged(int maxLevel){
+        mCurrentSpellFilter.setMaxLevel(maxLevel);
+        RefreshSpellList();
+    }
+
+    private void RefreshSpellList(){
+        // first filter by level
+        mFilteredSpellList = SpellUtils.filterByLevel(mFullSpellList, mCurrentSpellFilter.getMinLevel(), mCurrentSpellFilter.getMaxLevel());
+
+        // then by class types
+        mFilteredSpellList = SpellUtils.filterByClass(mFilteredSpellList, mCurrentSpellFilter.getClasses());
+
+        // then by search text
+        mFilteredSpellList = SpellUtils.filterByName(mFilteredSpellList, mCurrentSpellFilter.getText());
 
         // display new list and send out event.
         mSpellAdapter.setSpells(mFilteredSpellList);

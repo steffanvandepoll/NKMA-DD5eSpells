@@ -9,4 +9,6 @@ import java.util.ArrayList;
  */
 public interface IFilterChangeListener {
     void onFilterChanged(ArrayList<ClassType> classList);
+    void onMinLevelChanged(int minLevel);
+    void onMaxLevelChanged(int maxLevel);
 }
